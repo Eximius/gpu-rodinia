@@ -669,11 +669,13 @@ void loadReference(MatchContext* ctx) {
                                          
         
         
-        CUDA_SAFE_CALL( cudaMemcpyToArray( (cudaArray*)(ref->d_node_tex_array),
+        CUDA_SAFE_CALL( cudaMemcpy2DToArray( (cudaArray*)(ref->d_node_tex_array),
                                            0,
                                            0,
                                            ref->h_node_tex_array,
-                                           ref->tex_width * ref->tex_node_height * sizeof(PixelOfNode),
+                                           ref->tex_width * sizeof(PixelOfNode),
+                                           ref->tex_width * sizeof(PixelOfNode),
+                                           ref->tex_node_height,
                                            cudaMemcpyHostToDevice));
 
         nodetex.addressMode[0] = cudaAddressModeClamp;
@@ -710,11 +712,13 @@ void loadReference(MatchContext* ctx) {
                                          ref->tex_width,
                                          ref->tex_children_height );
                                          
-        CUDA_SAFE_CALL( cudaMemcpyToArray((cudaArray*)(ref->d_children_tex_array),
+        CUDA_SAFE_CALL( cudaMemcpy2DToArray((cudaArray*)(ref->d_children_tex_array),
                                           0,
                                           0,
                                           ref->h_children_tex_array,
-                                          ref->tex_width * ref->tex_children_height * sizeof(PixelOfChildren),
+                                          ref->tex_width * sizeof(PixelOfChildren),
+                                          ref->tex_width * sizeof(PixelOfChildren),
+                                          ref->tex_children_height,
                                           cudaMemcpyHostToDevice));
                                           
         childrentex.addressMode[0] = cudaAddressModeClamp;

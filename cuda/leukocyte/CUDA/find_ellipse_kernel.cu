@@ -25,8 +25,8 @@ __constant__ int c_tX[NCIRCLES * NPOINTS];
 __constant__ int c_tY[NCIRCLES * NPOINTS];
 
 // Texture references to the gradient matrices used by the GICOV kernel
-texture<float, 1, cudaReadModeElementType> t_grad_x;
-texture<float, 1, cudaReadModeElementType> t_grad_y;
+texture<float, cudaTextureType1D, cudaReadModeElementType> t_grad_x;
+texture<float, cudaTextureType1D, cudaReadModeElementType> t_grad_y;
 
 // Kernel to find the maximal GICOV value at each pixel of a
 //  video frame, based on the input x- and y-gradient matrices
@@ -138,7 +138,7 @@ float *GICOV_CUDA(int grad_m, int grad_n, float *host_grad_x, float *host_grad_y
 __constant__ float c_strel[STREL_SIZE * STREL_SIZE];
 
 // Texture reference to the GICOV matrix used by the dilation kernel
-texture<float, 1, cudaReadModeElementType> t_img;
+texture<float, cudaTextureType1D, cudaReadModeElementType> t_img;
 
 // Kernel to compute the dilation of the GICOV matrix produced by the GICOV kernel
 // Each element (i, j) of the output matrix is set equal to the maximal value in

@@ -3,9 +3,6 @@
 #include <string.h>
 #include <math.h>
 #include <assert.h>
-
-#include <omp.h>
-
 #include <cuda.h>
 
 #define THREADS_PER_DIM 16

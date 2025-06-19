@@ -2,6 +2,7 @@
 #define _BUCKETSORT_KERNEL_H_
 
 #include <stdio.h>
+#include <cuda.h>
 
 #define BUCKET_WARP_LOG_SIZE	5
 #define BUCKET_WARP_N			1
@@ -13,7 +14,7 @@
 #define BUCKET_BLOCK_MEMORY		(DIVISIONS * BUCKET_WARP_N)
 #define BUCKET_BAND				128
 
-texture<float, 1, cudaReadModeElementType> texPivot; 
+texture<float, cudaTextureType1D, cudaReadModeElementType> texPivot; 
 
 __device__ int addOffset(volatile unsigned int *s_offset, unsigned int data, unsigned int threadTag){
     unsigned int count;
