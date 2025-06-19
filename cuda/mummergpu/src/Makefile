@@ -125,10 +125,8 @@ $(OBJDIR)/%.cu_o : $(SRCDIR)%.cu
 %.ptx : $(SRCDIR)%.cu mummergpu_kernel.cu
 	$(NVCC) -o $@ -ptx -Xopencc -LIST:source=on $< $(NVCCFLAGS)
 
-makedirectories:
-	@mkdir -p $(LIBDIR)
-	@mkdir -p $(OBJDIR)
-	@mkdir -p $(BINDIR)
+$(LIBDIR) $(OBJDIR) $(BINDIR):
+	@mkdir -p $@
 
 LIBOBJS= \
     $(OBJDIR)/mummergpu_gold.cpp_o \

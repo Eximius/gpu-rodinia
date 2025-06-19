@@ -8,7 +8,7 @@ SRC = srad.cu
 
 EXE = srad
 
-release: $(SRC)
+$(EXE): $(SRC)
 	$(CC) $(KERNEL_DIM) $(SRC) -o $(EXE) -I$(INCLUDE) -L$(CUDA_LIB_DIR) 
 
 enum: $(SRC)

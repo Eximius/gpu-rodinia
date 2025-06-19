@@ -8,7 +8,7 @@ SRC = bfs.cu
 
 EXE = bfs.out
 
-release: $(SRC)
+$(EXE): $(SRC)
 	$(CC) $(SRC) -o $(EXE) -I$(INCLUDE) -I../util -L$(CUDA_LIB_DIR) -DTIMING
 
 clang: $(SRC)
