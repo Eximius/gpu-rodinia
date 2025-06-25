@@ -16,7 +16,7 @@ DATA_REF = data/rodinia-3.1-data.tar.gz
 
 # all: CUDA OMP OPENCL
 
-CUDA:  $(addprefix cuda/,$(CUDA_DIRS)) $(DATA_REF)
+CUDA:  $(CUDA_DIRS) $(DATA_REF)
 
 SCALE: $(SCALE_DIRS) $(DATA_REF)
 
@@ -76,13 +76,13 @@ OPENCL:
 clean: CUDA_clean OMP_clean OCL_clean
 
 CUDA_clean:
-	cd $(CUDA_BIN_DIR); rm -f *
+	cd $(CUDA_BIN_DIR) && rm -f *
 	for dir in $(CUDA_DIRS) ; do $(MAKE) -C cuda/$$dir clean;  done
 	
 OMP_clean:
-	cd $(OMP_BIN_DIR); rm -f *
-	for dir in $(OMP_DIRS) ; do cd openmp/$$dir ; make clean ; cd ../.. ; done
+	cd $(OMP_BIN_DIR) && rm -f *
+	for dir in $(OMP_DIRS) ; do $(MAKE) -C openmp/$$dir clean; done
 
 OCL_clean:
-	cd $(OPENCL_BIN_DIR); rm -f *
-	for dir in $(OCL_DIRS) ; do cd opencl/$$dir ; make clean ; cd ../.. ; done
+	cd $(OPENCL_BIN_DIR) && rm -f *
+	for dir in $(OCL_DIRS) ; do $(MAKE) -C opencl/$$dir clean; done
