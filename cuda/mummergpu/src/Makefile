@@ -140,6 +140,11 @@ $(LIBDIR)/libmummergpu$(LIBSUFFIX).a: $(LIBOBJS)
 BINOBJS= \
     $(OBJDIR)/mummergpu_main.cpp_o
 
+makedirectories:
+	@mkdir -p $(LIBDIR)
+	@mkdir -p $(OBJDIR)
+	@mkdir -p $(BINDIR)
+	
 $(BINDIR)/mummergpu: makedirectories $(LIBDIR)/libmummergpu$(LIBSUFFIX).a $(BINOBJS)
 	$(LINK) -o $(BINDIR)/$(BINNAME)  $(BINOBJS) -lmummergpu$(LIBSUFFIX) $(LIB) 
 		
