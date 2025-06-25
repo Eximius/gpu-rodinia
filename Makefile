@@ -26,11 +26,11 @@ $(CUDA_DIRS): % :
 	$(MAKE) -C cuda/$*
 
 $(DATA_REF):
-	cd data
-	wget https://www.dropbox.com/s/cc6cozpboht3mtu/rodinia-3.1-data.tar.gz
-	tar -xf rodinia-3.1-data.tar.gz
-	mv rodinia-data/* ./
-	rm -r rodinia-data
+	cd data \
+	&& wget https://www.dropbox.com/s/cc6cozpboht3mtu/rodinia-3.1-data.tar.gz \
+	&& tar -xf rodinia-3.1-data.tar.gz \
+	&& mv rodinia-data/* ./ \
+	&& rm -r rodinia-data
 
 OMP:
 	cd openmp/backprop;				make;	cp backprop $(OMP_BIN_DIR)
